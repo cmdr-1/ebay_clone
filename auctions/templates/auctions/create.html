@@ -6,9 +6,11 @@
 
 <h2>Create a Listing</h2>
 
+<div class="form-group">
 <form method="POST" novalidate>
   {% csrf_token %} {{ form.as_p }}
   <input type="submit" value="Create Lisitng" class="btn btn-primary"/>
+
 </form>
 {% endblock %}
 
