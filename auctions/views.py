@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse
 
 from .models import User, Listings, Bid, Comments
+from .forms import ListingsForm
 
 # Adding the @login_required decorator on top of any view will ensure that only a user who is logged in can access that view.
 
@@ -64,17 +65,30 @@ def register(request):
         return render(request, "auctions/register.html")
 
 def create(request):
+    
+    form = ListingsForm()
 
     if request.method == "POST":
-        user = request.user
-        product_listed = request.POST.get("title")
-        product_desc = request.POST.get("description")
-        product_img = request.POST.get("image")
-        init_bid = float(request.POST.get("initial_bid"))
-        category = request.POST.get("category")
+        form = ListingsForm(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data)
+        else:
+            print(form.errors)
 
-        listings = Listings(user = user, product_listed = product_listed, product_desc = product_desc, 
-                            product_img = product_img, init_bid = init_bid, category = category)
-        listings.save()
+    context = {
+        'form': form
+    }
+    return render(request, "auctions/create.html", context)
 
-        return render(request, "auctions/create.html")
+
+
+        # user = request.user
+        # product_listed = request.POST.get("title")
+        # product_desc = request.POST.get("description")
+        # product_img = request.POST.get("image")
+        # init_bid = float(request.POST.get("initial_bid"))
+        # category = request.POST.get("category")
+
+        # listings = Listings(user = user, product_listed = product_listed, product_desc = product_desc, 
+        #                     product_img = product_img, init_bid = init_bid, category = category)
+        # listings.save()
