@@ -6,7 +6,7 @@ This is the second project for CS50W - Web Development with Python and JavaScrip
 
 Video Demonstration: Pending
 
-# Specification
+### Specification
 
 Design an eBay-like e-commerce auction site that will allow users to post auction listings, place bids on listings, comment on those listings, and add listings to a “watchlist.”
 
