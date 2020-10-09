@@ -66,14 +66,11 @@ def register(request):
 
 def create(request):
     
-    form = ListingsForm()
-
-    if request.method == "POST":
-        form = ListingsForm(request.POST)
-        if form.is_valid():
-            print(form.cleaned_data)
-        else:
-            print(form.errors)
+    form = ListingsForm(request.POST or None)  
+    if form.is_valid():
+        form.instance.listing_user = request.user
+        form.save()
+        form = ListingsForm()
 
     context = {
         'form': form
