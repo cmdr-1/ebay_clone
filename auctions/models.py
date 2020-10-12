@@ -5,17 +5,29 @@ from django.db import models
 class User(AbstractUser):
     pass
 
+CATEGORY_CHOICES = (
+    ('toys and hobbies', 'TOYS AND HOBBIES'),
+    ('auto', 'AUTO'),
+    ('collectibles and art', 'COLLECTIBLES AND ART'),
+    ('fashion', 'FASHION'),
+    ('sporting goods', 'SPORTING GOODS'),
+    ('electronics', 'ELECTRONICS'),
+    ('home and garden', 'HOME AND GARDEN'),
+    ('other', 'OTHER'),
+)
 class Listings(models.Model):
     title = models.CharField(max_length=64, default="")
     description = models.TextField(default="")
     image = models.URLField(blank=True, null=True)
     initial_bid = models.DecimalField(max_digits=8, decimal_places=2)
-    category = models.CharField(max_length=64, default="Misc") 
+    category = models.CharField(max_length=64, choices=CATEGORY_CHOICES, default="other") 
     listing_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="listing_user")
     # listing.bid.all()????
 
     def __str__(self):
         return f"{self.title}: {self.category}"
+
+
 
 class Bid(models.Model):
     bid = models.DecimalField(max_digits=8, decimal_places=2)

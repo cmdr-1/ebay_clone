@@ -1,0 +1,24 @@
+{% extends "auctions/layout.html" %} {% block body %}
+
+<h1>Title: {{ object.title }}</h1>
+
+
+<div>
+  <div class="image-block">
+    <img src="{{ object.image }}" width="400px" />
+  </div>
+  <div>
+    <h4>Category: {{ object.category }}</h4>
+    <br />
+    <h5>Starting Bid: ${{ object.initial_bid }}</h5>
+    <hr />
+    <h3>Current Bid: $</h3>
+    <button class="btn btn-primary">Bid on this Item</button>
+    <br />
+    <br />
+    <h4>Description</h4>
+    <p>{{ object.description}} <br /></p>
+  </div>
+</div>
+
+{% endblock %}

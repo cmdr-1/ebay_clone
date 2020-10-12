@@ -5,3 +5,30 @@ body {
 .form-control {
     width: 50vw;
 }
+
+ul {
+    list-style-type: none;
+}
+
+.image-block {
+        display: inline-flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 30px;
+}
+
+.text-block {
+    display: inline-block;    
+}
+
+.listing-block {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.btn {
+    margin: 10px 0px;
+}

@@ -1,7 +1,42 @@
-{% extends "auctions/layout.html" %}
+{% extends "auctions/layout.html" %} {% block body %}
 
-{% block body %}
-    <h2>Active Listings</h2>
+<h2>Active Listings</h2>
+<ul>
+  {% for instance in object_list %} {% if instance.image == blank %}
+  <li>
+    <div class="listing-block">
+        <div class="image-block">
+            <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/300px-No_image_available.svg.png"
+            width="200px"/>
+        </div>
+        <div class = text-block>
+            <h4><a href="listing/{{ instance.id }}"> {{ instance.title }} - ${{ instance.initial_bid }}</h4></a>
+            <br/>
+            <p>Description: <br/>
+            {{ instance.description }}
+            </p>
+        </div>
+    </div>
+  </li>
+  <hr />
+  {% else %}
+  <li>
+        <div class="listing-block">
+            <div class="image-block">
+                <img src="{{ instance.image }}" width="200px"/>
+            </div>
+            <div class = text-block>
+                <h4><a href="listing/{{ instance.id }}">{{ instance.title }} - ${{ instance.initial_bid }}</h4></a>
+                <br/>
+                <p>Description: <br/>
+                {{ instance.description }}
+                </p>
+            </div>
+        </div>
+  </li>
+  <hr />
+  {% endif %} {% endfor %}
+</ul>
 
-    TODO
 {% endblock %}

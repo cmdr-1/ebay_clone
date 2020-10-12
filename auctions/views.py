@@ -10,7 +10,12 @@ from .forms import ListingsForm
 # Adding the @login_required decorator on top of any view will ensure that only a user who is logged in can access that view.
 
 def index(request):
-    return render(request, "auctions/index.html")
+    queryset = Listings.objects.all()
+    context = {
+        'object_list': queryset
+    }
+
+    return render(request, "auctions/index.html", context)
 
 
 def login_view(request):
@@ -77,15 +82,13 @@ def create(request):
     }
     return render(request, "auctions/create.html", context)
 
+def listing(request, id):
 
+    obj = Listings.objects.get(id=id)
+    
+    context = {
+        'object': obj
 
-        # user = request.user
-        # product_listed = request.POST.get("title")
-        # product_desc = request.POST.get("description")
-        # product_img = request.POST.get("image")
-        # init_bid = float(request.POST.get("initial_bid"))
-        # category = request.POST.get("category")
+    }
 
-        # listings = Listings(user = user, product_listed = product_listed, product_desc = product_desc, 
-        #                     product_img = product_img, init_bid = init_bid, category = category)
-        # listings.save()
+    return render(request, "auctions/listing.html", context)
