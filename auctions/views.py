@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse
 
 from .models import User, Listings, Bid, Comments
-from .forms import ListingsForm
+from .forms import ListingsForm, CommentForm
 
 # Adding the @login_required decorator on top of any view will ensure that only a user who is logged in can access that view.
 
@@ -84,11 +84,28 @@ def create(request):
 
 def listing(request, id):
 
-    obj = Listings.objects.get(id=id)
+    # obj = Listings.objects.get(id=id)
+    listing = Listings.objects.get(id=id)
+    comments = listing.comments.filter(active=True)
+    new_comment = None
+
+    if request.method == 'POST':
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+
+            new_comment = comment_form.save(commit=False)
+            new_comment.listing = listing
+            new_comment.save()
+    else:
+        comment_form = CommentForm()
     
     context = {
-        'object': obj
-
+        'listing': listing,
+        'comments': comments,
+        "new_comment": new_comment,
+        "comment_form": comment_form
     }
 
+    # if request.method == "GET":
+    #     listing_comments = 
     return render(request, "auctions/listing.html", context)

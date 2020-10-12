@@ -1,5 +1,5 @@
 body {
-    padding: 10px;
+    padding: 20px;
 }
 
 .form-control {
@@ -31,4 +31,17 @@ ul {
 
 .btn {
     margin: 10px 0px;
+}
+
+#title-section {
+    display: flex;
+    flex-direction: row;
+}
+
+#title-section .btn-success {
+    margin-left: 30px;
+}
+
+#comments {
+    padding-top: 10vh;
 }

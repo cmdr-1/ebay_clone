@@ -1,24 +1,69 @@
 {% extends "auctions/layout.html" %} {% block body %}
 
-<h1>Title: {{ object.title }}</h1>
+<div id="title-section">
+  <h1>Title: {{ listing.title }}</h1>
+  <button class="btn btn-success">Add to Watchlist</button>
+</div>
 
-
-<div>
-  <div class="image-block">
-    <img src="{{ object.image }}" width="400px" />
-  </div>
-  <div>
-    <h4>Category: {{ object.category }}</h4>
-    <br />
-    <h5>Starting Bid: ${{ object.initial_bid }}</h5>
-    <hr />
-    <h3>Current Bid: $</h3>
-    <button class="btn btn-primary">Bid on this Item</button>
-    <br />
-    <br />
-    <h4>Description</h4>
-    <p>{{ object.description}} <br /></p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 card mb-4 mt-3">
+      <div class="card-body">
+        <div class="image-block">
+          <img src="{{ listing.image }}" width="400px" />
+        </div>
+        <div>
+          <h4>Category: {{ listing.category }}</h4>
+          <br />
+          <h5>Starting Bid: ${{ listing.initial_bid }}</h5>
+          <hr />
+          <h3>Current Bid: $</h3>
+          <button class="btn btn-primary">Bid on this Item</button>
+          <br />
+          <br />
+          <h4>Description</h4>
+          <p>{{ listing.description}} <br /></p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 card mb-4 mt-3">
+      <div class="card-body">
+        <!-- comments -->
+        <h2>{{ comments.count }} comment(s)</h2>
+
+        {% for comment in comments %}
+        <div class="comments">
+          <p class="font-weight-bold">
+            {{ comment.user }}
+            <span class="text-muted font-weight-normal">
+              on {{ comment.submitted}}
+            </span>
+          </p>
+          {{ comment.comment | linebreaks }}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="col-md-12 card mb-4 mt-3">
+      <div class="card-body">
+        {% if new_comment %}
+        <div class="alert alert-success" role="alert">
+          Your comment is awaiting moderation
+        </div>
+        {% else %}
+        <h3>Leave a comment</h3>
+        <form method="post" style="margin-top: 1.3em">
+          {{ comment_form.as_p }} {% csrf_token %}
+          <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+        </form>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
