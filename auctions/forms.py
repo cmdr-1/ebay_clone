@@ -26,10 +26,18 @@ class CommentForm(forms.ModelForm):
     
     class Meta:
         model = Comments
+        exclude = ('user',)
         fields = [
             'user',
             'comment'
         ]
+        
+    def __init__(self, *args, **kwargs):
+        super(CommentForm, self).__init__(*args, **kwargs)
+        for field in iter(self.fields):
+            self.fields[field].widget.attrs.update({
+                'class': 'form-control'
+        })
 
 # class BidForm(forms.ModelForm):
 

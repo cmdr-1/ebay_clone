@@ -40,7 +40,7 @@ class Comments(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_comments")
     listing = models.ForeignKey(Listings, on_delete=models.CASCADE, related_name="comments")
     submitted = models.DateTimeField(auto_now_add=True)
-    active = models.BooleanField(default=False)
+    active = models.BooleanField(default=True)
 
     class Meta:
         ordering = ['submitted']

@@ -92,7 +92,7 @@ def listing(request, id):
     if request.method == 'POST':
         comment_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
-
+            comment_form.instance.user = request.user
             new_comment = comment_form.save(commit=False)
             new_comment.listing = listing
             new_comment.save()
