@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
-from .models import User, Listings, Bid, Comments
+from .models import User, Listings, Bid, Comments, Watchlist
 from .forms import ListingsForm, CommentForm
 
 # Adding the @login_required decorator on top of any view will ensure that only a user who is logged in can access that view.
@@ -106,6 +106,19 @@ def listing(request, id):
         "comment_form": comment_form
     }
 
-    # if request.method == "GET":
-    #     listing_comments = 
     return render(request, "auctions/listing.html", context)
+
+def watchlist(request, id):
+
+    # Watchlist.user = request.user.id
+    # Watchlist.listing = Listings.objects.get(id=id)
+
+    id = request.user.id
+    watched = Watchlist.objects.filter(user=request.user)
+
+    context = {
+        'watched': watched,
+        'id': id
+    }
+
+    return render(request, "auctions/watchlist.html", context)

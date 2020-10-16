@@ -48,3 +48,7 @@ class Comments(models.Model):
 
     def __str__(self):
         return f"Comment {self.comment} by {self.user}"
+
+class Watchlist(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_list")
+    listing = models.ManyToManyField(Listings, related_name="watched_listings")

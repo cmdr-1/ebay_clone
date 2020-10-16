@@ -1,0 +1,15 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+This is {{ user.username}}'s watchlist.
+{% for listing in watched %}
+        <div>
+            <h4>{{listing.title}}</h4>
+            <p>Description: {{listing.description}}</p>
+        </div>
+    {% empty %}
+        <p>No listings have been added to watchlist yet.</p>
+{% endfor %}
+
+{% endblock %}

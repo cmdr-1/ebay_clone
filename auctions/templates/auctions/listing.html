@@ -2,16 +2,20 @@
 
 <div id="title-section">
   <h1>Title: {{ listing.title }}</h1>
-  <button class="btn btn-success">Add to Watchlist</button>
+  <a href="" class="btn btn-success">Add to Watchlist</a>
 </div>
 
 <div class="container">
   <div class="row">
     <div class="col-md-12 card mb-4 mt-3">
       <div class="card-body">
+        {% if listing.image == blank %}
+          <H2><em>No Image</em></H2>
+        {% else %}
         <div class="image-block">
           <img src="{{ listing.image }}" width="400px" />
         </div>
+        {% endif %}
         <div>
           <h4>Category: {{ listing.category }}</h4>
           <br />
