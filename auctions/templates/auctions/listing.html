@@ -2,7 +2,10 @@
 
 <div id="title-section">
   <h1>Title: {{ listing.title }}</h1>
-  <a href="" class="btn btn-success">Add to Watchlist</a>
+  <form action="{% url 'watchlist' request.user %}" method="POST">
+  {% csrf_token %} 
+  <input type="submit" class="btn btn-success" value="Add to Watchlist"/>
+</form>
 </div>
 
 <div class="container">

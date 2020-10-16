@@ -108,17 +108,19 @@ def listing(request, id):
 
     return render(request, "auctions/listing.html", context)
 
-def watchlist(request, id):
+def watchlist(request, username):
 
-    # Watchlist.user = request.user.id
-    # Watchlist.listing = Listings.objects.get(id=id)
+    Watchlist.user = request.user
+    # Watchlist.listing = Listings.objects.get(id)
 
-    id = request.user.id
-    watched = Watchlist.objects.filter(user=request.user)
+    if request.user.is_authenticated: 
+        if request.user == Watchlist.user:
+            username = request.user
+            watched = Watchlist.objects.filter(user=request.user)
 
     context = {
         'watched': watched,
-        'id': id
+        'username': username
     }
 
     return render(request, "auctions/watchlist.html", context)
