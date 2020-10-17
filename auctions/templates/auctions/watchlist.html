@@ -2,10 +2,10 @@
 
 {% block body %}
 
-{% for listing in watched %}
+{% for listing in watchlist %}
         <div>
-            <h4>{{listing.title}}</h4>
-            <p>Description: {{listing.description}}</p>
+            <h4>{{ listing.listing }}</h4>
+            <p>Description: {{ listing.description }}</p>
         </div>
     {% empty %}
         <p>No listings have been added to watchlist yet.</p>

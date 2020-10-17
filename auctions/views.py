@@ -98,6 +98,10 @@ def listing(request, id):
             new_comment.save()
     else:
         comment_form = CommentForm()
+
+    # find a way to check if the listing is being watched
+    # provide context like 'watching': True'
+
     
     context = {
         'listing': listing,
@@ -108,19 +112,38 @@ def listing(request, id):
 
     return render(request, "auctions/listing.html", context)
 
-def watchlist(request, username):
+def addwatchlist(request, id):
 
-    Watchlist.user = request.user
-    # Watchlist.listing = Listings.objects.get(id)
+    listing = Listings.objects.get(id=id)
+    print(listing)
+    user = request.user
+    watched = Watchlist(listing = listing, user = user)
+    watched.save()
+    return HttpResponseRedirect(reverse('listing', args=(listing.id,)))
 
-    if request.user.is_authenticated: 
-        if request.user == Watchlist.user:
-            username = request.user
-            watched = Watchlist.objects.filter(user=request.user)
+def watchlist(request):
+    
+    queryset = Watchlist.objects.filter(user=request.user)
+    wlisting = Listings.objects.all()
 
     context = {
-        'watched': watched,
-        'username': username
+        'watchlist': queryset,
+        'wlisting': wlisting
     }
 
-    return render(request, "auctions/watchlist.html", context)
+    return render(request, "auctions/watchlist.html", context)    
+
+# def makebid(request, bid):
+    
+#     if int(new_bid) > (current_bid) and int(new_bid) > 0:
+#         message = "Your bid has been accepted"
+#         print(f"Cheecking 1: {message}")
+#         messagebid = f"The Current Bid is $ {new_bid}"
+#         print(f"Checking 2 {messagebid}")
+#         bidding = Bid(listing = listing, bid = new_bid, bidder = user)
+#         bidding.save()
+#     else:
+#         error = "Your bid must be larger than the current bid"
+#         print(f"Checking 3 : {error}")
+
+#     return HttpResponseRedirect(reverse('listing', args=(listing_id,)))

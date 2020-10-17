@@ -22,7 +22,8 @@ class Listings(models.Model):
     initial_bid = models.DecimalField(max_digits=8, decimal_places=2)
     category = models.CharField(max_length=64, choices=CATEGORY_CHOICES, default="other") 
     listing_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="listing")
-    # listing.bid.all()????
+    
+    
 
     def __str__(self):
         return f"{self.title}: {self.category}"
@@ -30,6 +31,7 @@ class Listings(models.Model):
 class Bid(models.Model):
     bid = models.DecimalField(max_digits=8, default=0, decimal_places=2)
     listing = models.ForeignKey(Listings, on_delete=models.CASCADE, related_name="bid")
+    bidder = models.ForeignKey(User, on_delete=models.CASCADE, related_name="bidder")
 
     
     def __str__(self):
@@ -51,4 +53,4 @@ class Comments(models.Model):
 
 class Watchlist(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_list")
-    listing = models.ManyToManyField(Listings, related_name="watched_listings")
+    listing = models.ForeignKey(Listings, on_delete=models.CASCADE, related_name="watched_listings")
