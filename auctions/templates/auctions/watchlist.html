@@ -3,10 +3,17 @@
 {% block body %}
 
 {% for listing in watchlist %}
-        <div>
-            <h4>{{ listing.listing }}</h4>
-            <p>Description: {{ listing.description }}</p>
-        </div>
+<div class="listing-block">
+
+    <div class="image-block">        
+        <img src="{{ listing.listing.image }}" width="100px"/>
+    </div>
+    <div class= text-block>
+               <h4><a href="/listing/{{ listing.listing.id }}">{{ listing.listing }}</h4></a>
+               <br> 
+               <p>Description: {{ listing.listing.description }}</p>
+    </div>
+</div>
     {% empty %}
         <p>No listings have been added to watchlist yet.</p>
 {% endfor %}
