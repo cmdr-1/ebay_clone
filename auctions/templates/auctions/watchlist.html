@@ -2,6 +2,8 @@
 
 {% block body %}
 
+<h3>Your Watchlist</h3>
+<ul>
 {% for listing in watchlist %}
 <div class="listing-block">
 
@@ -10,12 +12,14 @@
     </div>
     <div class= text-block>
                <h4><a href="/listing/{{ listing.listing.id }}">{{ listing.listing }}</h4></a>
-               <br> 
+               <br>
+               <p>Current Price: ${{listing.listing.initial_bid}}</p>
                <p>Description: {{ listing.listing.description }}</p>
     </div>
 </div>
     {% empty %}
         <p>No listings have been added to watchlist yet.</p>
 {% endfor %}
+</ul>
 
 {% endblock %}

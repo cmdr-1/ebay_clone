@@ -115,14 +115,20 @@ def listing(request, id):
 def addwatchlist(request, id):
 
     listing = Listings.objects.get(id=id)
-    print(listing)
     user = request.user
-    watched = Watchlist(listing = listing, user = user)
+    watched = Watchlist(listing=listing, user= user)
     watched.save()
     return HttpResponseRedirect(reverse('listing', args=(listing.id,)))
 
+def removewatchlist(request, id):
+    listing = Listings.objects.get(id=id)
+    user = request.user
+    watched = Watchlist(listing=listing, user=user)
+    watched.delete()
+    return HttpResponseRedirect(reverse('listing', args=(listing.id,)))
+
 def watchlist(request):
-    
+
     queryset = Watchlist.objects.filter(user=request.user)
     wlisting = Listings.objects.all()
 

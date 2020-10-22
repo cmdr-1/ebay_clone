@@ -2,8 +2,13 @@
 
 <div id="title-section">
   <h1>Title: {{ listing.title }}</h1>
-   <a class="btn btn-success" href="{% url 'addwatchlist' listing.id %}">Add to Watchlist</a>
-</form>
+
+  {% if listing exists in watchlist %}
+  <a class="btn btn-success" href="{% url 'removewatchlist' listing.id %}">Remove from Watchlist</a>
+  {% else %}
+  <a class="btn btn-success" href="{% url 'addwatchlist' listing.id %}">Add to Watchlist</a>
+  {% endif %}
+  
 </div>
 
 <div class="container">
