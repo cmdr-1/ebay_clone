@@ -84,10 +84,11 @@ def create(request):
 
 def listing(request, id):
 
-    # obj = Listings.objects.get(id=id)
     listing = Listings.objects.get(id=id)
     comments = listing.comments.filter(active=True)
     new_comment = None
+
+    queryset = Watchlist.objects.all()
 
     if request.method == 'POST':
         comment_form = CommentForm(data=request.POST)
@@ -107,24 +108,18 @@ def listing(request, id):
         'listing': listing,
         'comments': comments,
         "new_comment": new_comment,
-        "comment_form": comment_form
+        "comment_form": comment_form,
+        "watchlist": queryset
     }
 
     return render(request, "auctions/listing.html", context)
 
-def addwatchlist(request, id):
+def watch(request, id):
 
     listing = Listings.objects.get(id=id)
     user = request.user
     watched = Watchlist(listing=listing, user= user)
     watched.save()
-    return HttpResponseRedirect(reverse('listing', args=(listing.id,)))
-
-def removewatchlist(request, id):
-    listing = Listings.objects.get(id=id)
-    user = request.user
-    watched = Watchlist(listing=listing, user=user)
-    watched.delete()
     return HttpResponseRedirect(reverse('listing', args=(listing.id,)))
 
 def watchlist(request):

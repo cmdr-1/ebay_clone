@@ -6,14 +6,14 @@ class User(AbstractUser):
     pass
 
 CATEGORY_CHOICES = (
-    ('toys and hobbies', 'TOYS AND HOBBIES'),
-    ('auto', 'AUTO'),
-    ('collectibles and art', 'COLLECTIBLES AND ART'),
-    ('fashion', 'FASHION'),
-    ('sporting goods', 'SPORTING GOODS'),
-    ('electronics', 'ELECTRONICS'),
-    ('home and garden', 'HOME AND GARDEN'),
-    ('other', 'OTHER'),
+    ('Toys and Hobbies', 'TOYS AND HOBBIES'),
+    ('Auto', 'AUTO'),
+    ('Collectibles and Art', 'COLLECTIBLES AND ART'),
+    ('Fashion', 'FASHION'),
+    ('Sporting Goods', 'SPORTING GOODS'),
+    ('Electronics', 'ELECTRONICS'),
+    ('Home and Garden', 'HOME AND GARDEN'),
+    ('Other', 'OTHER'),
 )
 class Listings(models.Model):
     title = models.CharField(max_length=64, default="")

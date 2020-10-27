@@ -27,6 +27,7 @@ ul {
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
+    max-width: 90%; 
 }
 
 .btn {

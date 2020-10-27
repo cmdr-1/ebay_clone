@@ -15,10 +15,11 @@
                <br>
                <p>Current Price: ${{listing.listing.initial_bid}}</p>
                <p>Description: {{ listing.listing.description }}</p>
+               <hr>
     </div>
 </div>
-    {% empty %}
-        <p>No listings have been added to watchlist yet.</p>
+{% empty %}
+    <p>No listings have been added to watchlist yet.</p>
 {% endfor %}
 </ul>
 
